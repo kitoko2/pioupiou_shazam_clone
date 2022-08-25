@@ -5,6 +5,7 @@ import 'dart:async';
 import 'package:acr_cloud_sdk/acr_cloud_sdk.dart';
 import 'package:avatar_glow/avatar_glow.dart';
 import "package:flutter/material.dart";
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
 import 'package:shazam_clone/screens/detailsong.dart';
 import 'package:shazam_clone/utils/colors.dart';
@@ -140,9 +141,9 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
     });
     arc
       ..init(
-        host: 'identify-eu-west-1.acrcloud.com',
-        accessKey: 'fec83cb144714dca5ae3462e7819b197',
-        accessSecret: '1W5LoQkpTl8eGJ1IfpHX6aOovXHWBNpxMqMflikI',
+        host: dotenv.env['HOST']!,
+        accessKey: dotenv.env['ACCESSKEY']!,
+        accessSecret: dotenv.env['ACCESSSECRET']!,
         setLog: false,
       )
       ..songModelStream.listen(searchSong);

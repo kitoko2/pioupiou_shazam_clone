@@ -75,7 +75,7 @@ class DeezerModel {
     explicitContentCover = json['explicit_content_cover'];
     preview = json['preview'];
     bpm = double.parse(json['bpm'].toString());
-    gain = json['gain'];
+    gain = double.parse(json['gain'].toString());
     availableCountries = json['available_countries'].cast<String>();
     if (json['contributors'] != null) {
       contributors = <Contributors>[];

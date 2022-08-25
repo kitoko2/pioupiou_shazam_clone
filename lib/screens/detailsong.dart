@@ -2,6 +2,7 @@
 
 import 'package:acr_cloud_sdk/acr_cloud_sdk.dart';
 import "package:flutter/material.dart";
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:lottie/lottie.dart';
@@ -27,10 +28,14 @@ class _DetailSongState extends State<DetailSong> {
   bool playing = false;
   final player = AudioPlayer();
 
-  chargeMusique(String url) async {
-    await player.setUrl(// Load a URL
-        url);
-    await player.setLoopMode(LoopMode.one);
+  chargeMusique(String? url) async {
+    if (url != null) {
+      await player.setUrl(// Load a URL
+          url);
+      await player.setLoopMode(LoopMode.one);
+    } else {
+      Fluttertoast.showToast(msg: "aucune url a lire");
+    }
   }
 
   @override
