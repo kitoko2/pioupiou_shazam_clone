@@ -1,14 +1,18 @@
+// ignore_for_file: await_only_futures
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shazam_clone/screens/home.dart';
+import 'package:shazam_clone/services/deezermodeldatabase.dart';
 import 'package:shazam_clone/utils/theme.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 late bool isFirst;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await DeezerModelBox.init();
   await dotenv.load(fileName: ".env");
   final prefs = await SharedPreferences.getInstance();
   String? theme = prefs.getString('theme') ?? 'dark';

@@ -15,14 +15,21 @@ class GetDeezerController extends GetxController {
   //    getDataOnDeezer(idTrackDeezer);
   //   super.onInit();
   // }
-  getIfValueIsInDeeze(Deezer? deezer) {
+  getIfValueIsInDeezer(Deezer? deezer) {
     if (deezer == null) {
       return false;
     }
     return true;
   }
 
-  getDataOnDeezer(String idTrackDeezer) async {
+  getIfValueIsInSpotify(Spotify? spotify) {
+    if (spotify == null) {
+      return false;
+    }
+    return true;
+  }
+
+  Future<bool> getDataOnDeezer(String idTrackDeezer) async {
     print(idTrackDeezer);
     try {
       load.value = true;
@@ -32,10 +39,39 @@ class GetDeezerController extends GetxController {
       print(response.data["album"]["cover_big"]);
       deezerModel.value = deezerModelResult;
       load.value = false;
-    } catch (e) {
-      print(e.toString());
+      return true;
+    } on DioError catch (e) {
+      print(e.type);
+      if (e.type == DioErrorType.other) {
+        Fluttertoast.showToast(msg: "Erreur de connexion");
+      } else {
+        Fluttertoast.showToast(msg: e.toString());
+      }
       load.value = false;
-      Fluttertoast.showToast(msg: e.toString());
+      return false;
     }
   }
+
+  // Future<bool> getOtherMusicOnAlbum(String idAlbumDeezer) async {
+  //   print(idAlbumDeezer);
+  //   try {
+  //     load.value = true;
+  //     final response =
+  //         await Dio().get("https://api.deezer.com/track/$idTrackDeezer");
+  //     DeezerModel deezerModelResult = DeezerModel.fromJson(response.data);
+  //     print(response.data["album"]["cover_big"]);
+  //     deezerModel.value = deezerModelResult;
+  //     load.value = false;
+  //     return true;
+  //   } on DioError catch (e) {
+  //     print(e.type);
+  //     if (e.type == DioErrorType.other) {
+  //       Fluttertoast.showToast(msg: "Erreur de connexion");
+  //     } else {
+  //       Fluttertoast.showToast(msg: e.toString());
+  //     }
+  //     load.value = false;
+  //     return false;
+  //   }
+  // }
 }

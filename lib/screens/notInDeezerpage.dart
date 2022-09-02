@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:acr_cloud_sdk/acr_cloud_sdk.dart';
 import "package:flutter/material.dart";
 import 'package:get/get.dart';
